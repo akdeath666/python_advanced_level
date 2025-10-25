@@ -1,0 +1,48 @@
+//THIS IS PROGRAM FOR MY FIRST APPLICATION, NAMING UNIT CONVERTER FROM KG TO POUND.
+package com.example.uniconv;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    private Button button;
+    private TextView textView;
+    private EditText editText;
+    private TextView text;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        button = findViewById(R.id.button);
+        textView = findViewById(R.id.textView2);
+        editText = findViewById(R.id.editTextText);
+        text = findViewById(R.id.textView3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Calculated Successfully", Toast.LENGTH_SHORT).show();
+                String str=editText.getText().toString();
+                int kg=Integer.parseInt(str);
+                double pound = 2.205 * kg;
+                text.setText("The value in pound is: " + pound);
+            }
+        });
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+}
